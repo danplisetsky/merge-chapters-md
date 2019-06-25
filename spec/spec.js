@@ -28,6 +28,8 @@ describe("cli", function() {
     fs.writeFileSync(ch1md, ch1);
 
     this.tmpdirEmpty = tmp.dirSync();
+
+    this.title = path.basename(tmpdir.name);
   });
 
   afterEach(function() {
@@ -45,5 +47,22 @@ describe("cli", function() {
       const { stdout } = error;
       expect(stdout.startsWith("failure")).toBe(true);
     }
+  });
+
+  it("directory with chapter directories, no params", async function() {
+    let resultPromise = spawnAsync("merge-chapters-md", [], {
+      cwd: this.tmpdir.name
+    });
+    let { stdout } = await resultPromise;
+
+    const finalMd = "# " + this.title + "\n\n" + ch0 + "\n" + ch1;
+    const result = fs
+      .readFileSync(path.join(this.tmpdir.name, this.title + ".md"))
+      .toString();
+
+    expect(result).toEqual(finalMd);
+    expect(
+      stdout.startsWith("success") && stdout.trim().endsWith(this.title + ".md")
+    ).toBe(true);
   });
 });
