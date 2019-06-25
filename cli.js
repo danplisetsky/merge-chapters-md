@@ -90,7 +90,7 @@ function mergeChapters(
         const tempPandocFile = "__temp" + pf;
         const panodcArgs = `-f markdown -t ${pf} -o ` + tempPandocFile;
 
-        pandoc(finalVersionMarkdown, panodcArgs, (error, result) => {
+        pandoc(finalVersionMarkdown, panodcArgs, (error, _result) => {
           if (error) return;
 
           fs.renameSync(
