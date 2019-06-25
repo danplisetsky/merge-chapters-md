@@ -80,10 +80,10 @@ function mergeChapters(
     if (!fs.existsSync(finalFolder)) {
       fs.mkdirSync(finalFolder, { recursive: true });
     }
-    fs.writeFileSync(
-      path.join(finalFolder, title + ".md"),
-      finalVersionMarkdown
-    );
+    const finalPath = path.join(finalFolder, title + ".md");
+    fs.writeFileSync(finalPath, finalVersionMarkdown);
+
+    console.log(chalk.green("success: ") + `wrote ${finalPath}`);
 
     if (pandocFormat) {
       /** @type {string} */ (pandocFormat).split(",").forEach(pf => {
@@ -93,15 +93,12 @@ function mergeChapters(
         pandoc(finalVersionMarkdown, panodcArgs, (error, _result) => {
           if (error) return;
 
-          fs.renameSync(
-            tempPandocFile,
-            path.join(finalFolder, title + "." + pf)
-          );
+          const finalPath = path.join(finalFolder, title + "." + pf);
+          fs.renameSync(tempPandocFile, finalPath);
+          console.log(chalk.green("success: ") + `wrote ${finalPath}`);
         });
       });
     }
-
-    console.log(chalk.green("success"));
   } catch (error) {
     console.log(chalk.red("failure: "), error.message, error.stack);
     process.exit(1);
