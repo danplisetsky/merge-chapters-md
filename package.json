@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jasmine"
+  },
   "keywords": [],
   "author": "Daniel Plisetsky",
   "license": "MIT",
@@ -16,6 +18,10 @@
     "node-pandoc": "^0.3.0"
   },
   "devDependencies": {
-    "@types/node": "^12.0.10"
+    "@expo/spawn-async": "^1.5.0",
+    "@types/node": "^12.0.10",
+    "jasmine": "^3.4.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "tmp": "^0.1.0"
   }
 }
