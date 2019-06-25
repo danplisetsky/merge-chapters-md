@@ -35,7 +35,7 @@ describe("cli", function() {
     this.tmpdirEmpty.removeCallback();
   });
 
-  it("no params, empty directory", async function() {
+  it("empty directory, no params", async function() {
     let resultPromise = spawnAsync("merge-chapters-md", [], {
       cwd: this.tmpdirEmpty.name
     });
