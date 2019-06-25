@@ -62,6 +62,10 @@ function mergeChapters(
   try {
     const chapterDirs = getChapterDirs(directory);
 
+    if (chapterDirs && chapterDirs.length === 0) {
+      throw new Error("no chapter directories found");
+    }
+
     // Get a consecutive list of all .md files we'll need to merge
     /** @type{Array<string>} */
     const chapterFiles = chapterDirs.flatMap(dir => {
@@ -100,7 +104,7 @@ function mergeChapters(
       });
     }
   } catch (error) {
-    console.log(chalk.red("failure: "), error.message, error.stack);
+    console.log(chalk.red("failure: "), error.message);
     process.exit(1);
   }
 }
