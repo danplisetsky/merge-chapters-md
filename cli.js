@@ -32,15 +32,7 @@ function processArgs(argv) {
     finalArgs = parsedArgs;
   }
 
-  return ({
-    title = path.basename(process.cwd()),
-    directory = process.cwd(),
-    finalFolder = process.cwd(),
-    pandocFormat = null,
-    addHeaders = false,
-    watch = false,
-    watchInterval = 1000
-  } = finalArgs);
+  return finalArgs;
 }
 
 function getChapterDirs(directory) {
@@ -118,13 +110,13 @@ function mergeChapters(
 
 function main() {
   const {
-    title,
-    directory,
-    finalFolder,
-    pandocFormat,
-    addHeaders,
-    watch,
-    watchInterval
+    title = path.basename(process.cwd()),
+    directory = process.cwd(),
+    finalFolder = process.cwd(),
+    pandocFormat = null,
+    addHeaders = false,
+    watch = false,
+    watchInterval = 1000
   } = processArgs(process.argv.slice(2));
 
   if (watch) {
