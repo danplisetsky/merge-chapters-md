@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pretest": "npm link",
     "test": "jasmine"
   },
   "keywords": [],
