@@ -45,7 +45,7 @@ function getChapterDirs(directory) {
           fs.statSync(path.join(directory, item)).isDirectory()
       );
   } catch (error) {
-    throw new Error(chalk.yellow(directory) + ": No such directory");
+    throw new Error("Error reading the directory: " + chalk.yellow(directory));
   }
 }
 
