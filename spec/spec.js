@@ -12,7 +12,11 @@ describe("cli", function() {
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec ante vel mi vehicula maximus. Nulla dictum faucibus lacus, vitae.
   `;
 
+  const subtitle = "_Cras tincidunt tellus turpis, sit_";
+
   beforeEach(function() {
+    this.tmpdirEmpty = tmp.dirSync();
+
     const tmpdir = (this.tmpdir = tmp.dirSync({
       unsafeCleanup: true
     }));
@@ -27,9 +31,13 @@ describe("cli", function() {
     fs.writeFileSync(ch0md, ch0);
     fs.writeFileSync(ch1md, ch1);
 
-    this.tmpdirEmpty = tmp.dirSync();
+    const subtitlemd = (this.subtitlemd = path.join(
+      tmpdir.name,
+      "subtitle.md"
+    ));
+    fs.writeFileSync(subtitlemd, subtitle);
 
-    this.title = path.basename(tmpdir.name);
+    this.defaultTitle = path.basename(tmpdir.name);
   });
 
   afterEach(function() {
@@ -55,14 +63,38 @@ describe("cli", function() {
     });
     let { stdout } = await resultPromise;
 
-    const finalMd = "# " + this.title + "\n\n" + ch0 + "\n" + ch1;
+    const finalMd = "# " + this.defaultTitle + "\n\n\n" + ch0 + "\n" + ch1;
     const result = fs
-      .readFileSync(path.join(this.tmpdir.name, this.title + ".md"))
+      .readFileSync(path.join(this.tmpdir.name, this.defaultTitle + ".md"))
       .toString();
 
     expect(result).toEqual(finalMd);
     expect(
-      stdout.startsWith("success") && stdout.trim().endsWith(this.title + ".md")
+      stdout.startsWith("success") &&
+        stdout.trim().endsWith(this.defaultTitle + ".md")
+    ).toBe(true);
+  });
+
+  it("directory with chapter directories, w/ subtitle", async function() {
+    let resultPromise = spawnAsync(
+      "merge-chapters-md",
+      ["-s", this.subtitlemd],
+      {
+        cwd: this.tmpdir.name
+      }
+    );
+    let { stdout } = await resultPromise;
+
+    const finalMd =
+      "# " + this.defaultTitle + "\n" + subtitle + "\n\n" + ch0 + "\n" + ch1;
+    const result = fs
+      .readFileSync(path.join(this.tmpdir.name, this.defaultTitle + ".md"))
+      .toString();
+
+    expect(result).toEqual(finalMd);
+    expect(
+      stdout.startsWith("success") &&
+        stdout.trim().endsWith(this.defaultTitle + ".md")
     ).toBe(true);
   });
 });
