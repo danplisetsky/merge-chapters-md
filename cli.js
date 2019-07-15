@@ -44,7 +44,8 @@ function getChapterDirs(directory) {
         item =>
           /\d+$/.test(item) &&
           fs.statSync(path.join(directory, item)).isDirectory()
-      );
+      )
+      .map(item => path.join(directory, item));
   } catch (error) {
     throw new Error("Error reading the directory: " + chalk.yellow(directory));
   }
@@ -129,9 +130,9 @@ function mergeChapters(
 
 function main() {
   const {
-    title = path.basename(process.cwd()),
     directory = process.cwd(),
-    finalFolder = process.cwd(),
+    title = path.basename(directory),
+    finalFolder = directory,
     pandocFormat = null,
     addHeaders = false,
     watch = false,
