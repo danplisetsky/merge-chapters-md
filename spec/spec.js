@@ -135,4 +135,26 @@ describe("cli", function() {
         stdout.trim().endsWith(this.defaultTitle + ".md")
     ).toBe(true);
   });
+
+  it("directory with chapter directories, w/ custom final folder", async function() {
+    let resultPromise = spawnAsync(
+      "merge-chapters-md",
+      ["-f", this.tmpdirEmpty.name],
+      {
+        cwd: this.tmpdir.name
+      }
+    );
+    let { stdout } = await resultPromise;
+
+    const finalMd = "# " + this.defaultTitle + "\n\n\n" + ch0 + "\n" + ch1;
+    const result = fs
+      .readFileSync(path.join(this.tmpdirEmpty.name, this.defaultTitle + ".md"))
+      .toString();
+
+    expect(result).toEqual(finalMd);
+    expect(
+      stdout.startsWith("success") &&
+        stdout.trim().endsWith(this.defaultTitle + ".md")
+    ).toBe(true);
+  });
 });
