@@ -20,6 +20,7 @@ function processArgs(argv) {
       watch: "w",
       "watch-interval": ["wi", "watchInterval"],
       "add-headers": ["ah", "addHeaders"],
+      subtitle: "s",
       config: "c"
     }
   });
@@ -49,12 +50,21 @@ function getChapterDirs(directory) {
   }
 }
 
+function readSubtitleFile(path) {
+  try {
+    return fs.readFileSync(path).toString();
+  } catch (error) {
+    throw new Error("Error reading the subtitle file: " + chalk.yellow(path));
+  }
+}
+
 function mergeChapters(
   title,
   directory,
   finalFolder,
   pandocFormat,
-  addHeaders
+  addHeaders,
+  subtitle
 ) {
   // Read all the folders in the provided directory
   // whose names end with digit(s)
@@ -79,8 +89,16 @@ function mergeChapters(
       return header + fs.readFileSync(ch).toString();
     });
 
+    // Read the subtitle file, if exists
+    const subtitleContent = subtitle ? readSubtitleFile(subtitle) : "";
+
     const finalVersionMarkdown =
-      "# " + title + "\n\n" + chapterContents.join("\n");
+      "# " +
+      title +
+      "\n" +
+      subtitleContent +
+      "\n\n" +
+      chapterContents.join("\n");
     if (!fs.existsSync(finalFolder)) {
       fs.mkdirSync(finalFolder, { recursive: true });
     }
@@ -117,7 +135,8 @@ function main() {
     pandocFormat = null,
     addHeaders = false,
     watch = false,
-    watchInterval = 1000
+    watchInterval = 1000,
+    subtitle = null
   } = processArgs(process.argv.slice(2));
 
   if (watch) {
@@ -136,11 +155,19 @@ function main() {
         directory,
         finalFolder,
         pandocFormat,
-        addHeaders
+        addHeaders,
+        subtitle
       );
     });
   } else {
-    mergeChapters(title, directory, finalFolder, pandocFormat, addHeaders);
+    mergeChapters(
+      title,
+      directory,
+      finalFolder,
+      pandocFormat,
+      addHeaders,
+      subtitle
+    );
   }
 }
 
