@@ -12,6 +12,7 @@ describe("cli", function() {
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec ante vel mi vehicula maximus. Nulla dictum faucibus lacus, vitae.
   `;
 
+  const customTitle = "Little Known Ways to MERGE CHAPTERS";
   const subtitle = "_Cras tincidunt tellus turpis, sit_";
 
   beforeEach(function() {
@@ -72,6 +73,24 @@ describe("cli", function() {
     expect(
       stdout.startsWith("success") &&
         stdout.trim().endsWith(this.defaultTitle + ".md")
+    ).toBe(true);
+  });
+
+  it("directory with chapter directories, w/ custom title", async function() {
+    let resultPromise = spawnAsync("merge-chapters-md", ["-t", customTitle], {
+      cwd: this.tmpdir.name
+    });
+    let { stdout } = await resultPromise;
+
+    const finalMd = "# " + customTitle + "\n\n\n" + ch0 + "\n" + ch1;
+    const result = fs
+      .readFileSync(path.join(this.tmpdir.name, customTitle + ".md"))
+      .toString();
+
+    expect(result).toEqual(finalMd);
+    expect(
+      stdout.startsWith("success") &&
+        stdout.trim().endsWith(customTitle + ".md")
     ).toBe(true);
   });
 
