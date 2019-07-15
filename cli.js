@@ -15,11 +15,11 @@ function processArgs(argv) {
     alias: {
       title: "t",
       directory: "d",
-      "final-folder": ["ff", "finalFolder"],
-      "pandoc-format": ["pf", "pandocFormat"],
+      "final-folder": ["f", "finalFolder"],
+      "pandoc-format": ["p", "pandocFormat"],
       watch: "w",
-      "watch-interval": ["wi", "watchInterval"],
-      "add-headers": ["ah", "addHeaders"],
+      "watch-interval": ["i", "watchInterval"],
+      "add-headers": ["a", "addHeaders"],
       subtitle: "s",
       config: "c"
     }
