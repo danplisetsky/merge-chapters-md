@@ -1,13 +1,21 @@
 {
   "name": "merge-chapters-md",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Merge markdown chapters into a single markdown file",
   "scripts": {
     "pretest": "npm link",
     "test": "jasmine"
   },
-  "keywords": [],
+  "keywords": [
+    "merge",
+    "chapters",
+    "markdown"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danplisetsky/merge-chapters-md.git"
+  },
+  "bugs": "https://github.com/danplisetsky/merge-chapters-md/issues",
   "author": "Daniel Plisetsky",
   "license": "MIT",
   "bin": "./cli.js",
