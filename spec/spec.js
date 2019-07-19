@@ -39,6 +39,18 @@ describe("cli", function() {
     fs.writeFileSync(subtitlemd, subtitle);
 
     this.defaultTitle = path.basename(tmpdir.name);
+
+    const config = (this.config = {
+      title: "Don't look back in anger when MERGING CHAPTERS",
+      subtitle: subtitlemd,
+      addHeaders: true,
+      finalFolder: this.tmpdirEmpty.name
+    });
+    const configJson = (this.configJson = path.join(
+      tmpdir.name,
+      "config.json"
+    ));
+    fs.writeFileSync(configJson, JSON.stringify(config));
   });
 
   afterEach(function() {
@@ -181,6 +193,38 @@ describe("cli", function() {
     expect(
       stdout.startsWith("success") &&
         stdout.trim().endsWith(this.defaultTitle + ".md")
+    ).toBe(true);
+  });
+
+  it("directory with chapter directories, w/ config", async function() {
+    let resultPromise = spawnAsync(
+      "merge-chapters-md",
+      ["-c", this.configJson],
+      {
+        cwd: this.tmpdir.name
+      }
+    );
+    let { stdout } = await resultPromise;
+
+    const finalMd =
+      "# " +
+      this.config.title +
+      "\n" +
+      subtitle +
+      "\n\n" +
+      "## 0\n" +
+      ch0 +
+      "\n" +
+      "## 1\n" +
+      ch1;
+    const result = fs
+      .readFileSync(path.join(this.tmpdirEmpty.name, this.config.title + ".md"))
+      .toString();
+
+    expect(result).toEqual(finalMd);
+    expect(
+      stdout.startsWith("success") &&
+        stdout.trim().endsWith(this.config.title + ".md")
     ).toBe(true);
   });
 });
