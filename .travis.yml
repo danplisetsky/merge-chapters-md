@@ -1,2 +1,8 @@
 language: node_js
 node_js: node
+deploy:
+  matrix:
+    - provider: npm
+    - email: danplisetsky@gmail.com
+    - api_key:
+        - secure: lh9peQRafkC/Jl0Oj8StI7zBEDgLibw7HZrwjxlmwbQnFr38n4lcHR4kXsB1ic8/tXWjDjsYlgVehVdZl6IKmateE/0Yxd+zsMzvA3UAxcKKTYnkaG9PCkSDhb0BExsPiF+37ptGJr1kXlUuCcWr66UF7+M7Zt8/f+6IyDYwLpX8GKDJUdk58TEjcE4rpI8ATXdi87nx8ZVphtFgM850mP4xWyKfooXVstQqytWDiGITve6WJFvtP2RfSjmHR7wrSUmfAfR8gw+fpTAwpvXG4HNXbqNTNaTU7KMiPcXgdzDK8XadJ44nyZkQ1LALy8OjvozgKehy9Uk3EZAVDJesNalQGzbroEUDxxmL4lK0UtkQcEKvkyhOclHEeDZxzUTO9GWMSvyYL1/aHV4xAXj7FNG3R8ADN+vIFdXq851z7zxybLzPJx0XsuHg5hR2JWfDiei4jSXbgnXl+UjjOV1F378eilGLa+0d7Kby2YCoFSGhgeNsHGaZS1iJtjtG2s0m6y9HLz5rM+1zP8w5dYcnWyZmiRz0yEKb4L3SPXXqBmFBJjZc2TNXzZLJhRRTXUe7XOprigC2GeoHhlWt/B8Z5fdl4+pwkb+0Cii3Zwhl66qIl951QAwhC1lmw4jIE8IGHq6B8sgseBq+sSyiENrOrvy7djCwsi6nmy9kJKSCBRM=
