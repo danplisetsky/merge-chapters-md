@@ -1,4 +1,4 @@
-# merge-chapters-md
+# merge-chapters-md &middot; [![Build Status](https://travis-ci.org/danplisetsky/merge-chapters-md.svg?branch=master)](https://travis-ci.org/danplisetsky/merge-chapters-md)
 
 ## The problem
 
