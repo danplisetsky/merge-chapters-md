@@ -6,7 +6,7 @@ You're writing a long markdown document with several chapters and you'd like the
 
 - Use a separate .md file for each chapter
 - Merge chapters into a single .md file
-- Optionaly:
+- Optionally:
   - Watch the files for changes and merge automatically
   - Add headers
   - Generate the output file in different formats using [Pandoc](https://pandoc.org/)
@@ -18,7 +18,7 @@ You're writing a long markdown document with several chapters and you'd like the
 $ npm install -g merge-chapters-md
 ```
 
-A zero-configuration command line program that is made to implememt the workflow described above. Let's see how it works.
+A zero-configuration command line program that is made to implement the workflow described above. Let's see how it works.
 
 Imagine you have the following setup:
 
@@ -56,7 +56,7 @@ Now, if you run `merge-chapters-md` in this folder, you'll get the following res
     └── ch2.md
 ```
 
-And the contetns of `Don't Look Back in Anger.md` are:
+And the contents of `Don't Look Back in Anger.md` are:
 
 ```
 # Don't Look Back in Anger
@@ -80,12 +80,12 @@ The following flags are available:
 -d, --directory                       Specify a custom directory. Defaults to the current directory
 -t, --title                           Specify a custom title. Defaults to the name basename of the directory
 -f, --finalFolder, --final-folder     Specify where to put the output file. Defaults to the directory
--a, --addHeaders, --add-headers       A boolean flag. If set, adds an H2 header to the beggining of every chapter. The header is the number of the chapter. Defaults to false
+-a, --addHeaders, --add-headers       A boolean flag. If set, adds an H2 header to the beginning of every chapter. The header is the number of the chapter. Defaults to false
 -s, --subtitle                         Specify a path to an .md file, the contents of which will be used as a subtitle. Defaults to null
--p, --pandocFromat, --pandoc-format   A comma separated list of pandoc output formats (pdf is not supported). Requires pandoc to be installed and available in your PATH. Defaults to null
+-p, --pandocFormat, --pandoc-format   A comma separated list of pandoc output formats (pdf is not supported). Requires pandoc to be installed and available in your PATH. Defaults to null
 -w, --watch                           A boolean flag. If set, watches the directory for changes and merges automatically. Defaults to false
 -i, --watchInterval, --watch-interval Specify an interval in ms to wait before merging automatically on change. Defaults to 1000
--c, --config                          Specify a path to a custom config file. It should be a JSON file where keys are any of the flags described above. Note that flags provied directly will override those present in the config file
+-c, --config                          Specify a path to a custom config file. It should be a JSON file where keys are any of the flags described above. Note that the flags provided directly will override those present in the config file
 ```
 
 ## Usage
