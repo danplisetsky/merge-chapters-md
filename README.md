@@ -80,7 +80,7 @@ The following flags are available:
 -d, --directory                       Specify a custom directory. Defaults to the current directory
 -t, --title                           Specify a custom title. Defaults to the name basename of the directory
 -f, --finalFolder, --final-folder     Specify where to put the output file. Defaults to the directory
--a, --addHeaders, --add-headers       A boolean flag. If set, adds an H2 header to the beggining of every chapters. The header is the number of the chapter. Defaults to false
+-a, --addHeaders, --add-headers       A boolean flag. If set, adds an H2 header to the beggining of every chapter. The header is the number of the chapter. Defaults to false
 -s, --subtitle                         Specify a path to an .md file, the contents of which will be used as a subtitle. Defaults to null
 -p, --pandocFromat, --pandoc-format   A comma separated list of pandoc output formats (pdf is not supported). Requires pandoc to be installed and available in your PATH. Defaults to null
 -w, --watch                           A boolean flag. If set, watches the directory for changes and merges automatically. Defaults to false
