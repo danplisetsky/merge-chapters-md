@@ -1,4 +1,4 @@
-# merge-chapters-md &middot; [![Build Status](https://travis-ci.org/danplisetsky/merge-chapters-md.svg?branch=master)](https://travis-ci.org/danplisetsky/merge-chapters-md)
+# merge-chapters-md &middot; [![Build Status](https://travis-ci.org/danplisetsky/merge-chapters-md.svg?branch=master)](https://travis-ci.org/danplisetsky/merge-chapters-md) [![npm](https://img.shields.io/npm/v/merge-chapters-md.svg)](https://www.npmjs.com/package/merge-chapters-md)
 
 ## The problem
 
